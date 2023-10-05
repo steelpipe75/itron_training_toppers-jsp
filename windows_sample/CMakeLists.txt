@@ -94,21 +94,6 @@ find_file(CONFIG_FILE sample1.cfg
     PATH ${TOPPERS_SAMPLE_WINDOWS_DIR}/
 )
 
-if(MSVC)
-    add_custom_command(
-        OUTPUT  ${CMAKE_BINARY_DIR}/sample1.i
-        DEPENDS ${CONFIG_FILE}
-        COMMAND ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} /P ${CONFIG_FILE}
-    )
-else()
-    add_custom_command(
-        OUTPUT  ${CMAKE_BINARY_DIR}/sample1.i
-        DEPENDS ${CONFIG_FILE}
-        COMMAND ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} -E -x c -o sample1.i ${CONFIG_FILE}
-    )
-endif()
-
-
 add_custom_command(
     OUTPUT  ${CMAKE_BINARY_DIR}/kernel_cfg.c ${CMAKE_BINARY_DIR}/kernel_id.h
     DEPENDS ${CMAKE_BINARY_DIR}/sample1.i
@@ -120,11 +105,13 @@ add_executable(sample1
 
     ${KERNEL_SRCS}
 
-    ${TOPPERS_SAMPLE_WINDOWS_DIR}/kernel_cfg.c
+    ${CMAKE_BINARY_DIR}/kernel_cfg.c
     ${TOPPERS_SAMPLE_WINDOWS_DIR}/sample1.c
 )
 
 target_link_libraries(sample1 winmm)
+
+file(RELATIVE_PATH relative ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR})
 
 target_include_directories(sample1 PRIVATE
     ${TOPPERS_CONFIG_WINDOWS_DIR}
@@ -133,6 +120,7 @@ target_include_directories(sample1 PRIVATE
     ${TOPPERS_SYSTASK_DIR}
     ${TOPPERS_SAMPLE_WINDOWS_DIR}
     ${TOPPERS_INCLUDE_DIR}
+    ${CMAKE_BINARY_DIR}
 )
 
 target_sources(sample1 PRIVATE ${TOPPERS_CONFIG_WINDOWS_DIR}/hal_resource.rc)
@@ -146,3 +134,19 @@ target_compile_options(sample1
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Release>>:-O3 -DNDEBUG>
 )
 
+set(MSVC_PREPROC_INC_OPT
+    /I ${relative}${TOPPERS_CONFIG_WINDOWS_DIR}
+    /I ${relative}${TOPPERS_KERNEL_DIR}
+    /I ${relative}${TOPPERS_LIBRARY_DIR}
+    /I ${relative}${TOPPERS_SYSTASK_DIR}
+    /I ${relative}${TOPPERS_SAMPLE_WINDOWS_DIR}
+    /I ${relative}${TOPPERS_INCLUDE_DIR}
+    /I ${relative}${CMAKE_BINARY_DIR}
+)
+
+add_custom_command(
+    OUTPUT  ${CMAKE_BINARY_DIR}/sample1.i
+    DEPENDS ${CONFIG_FILE}
+    COMMAND echo ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} ${MSVC_PREPROC_INC_OPT} /P ${CONFIG_FILE}
+    COMMAND      ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} ${MSVC_PREPROC_INC_OPT} /P ${CONFIG_FILE}
+)
