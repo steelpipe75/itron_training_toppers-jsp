@@ -123,7 +123,7 @@ target_include_directories(sample1 PRIVATE
     ${CMAKE_BINARY_DIR}
 )
 
-target_sources(sample1 PRIVATE ${TOPPERS_CONFIG_WINDOWS_DIR}/hal_resource.rc)
+target_sources(sample1 PRIVATE hal_resource.rc)
 
 set_target_properties(sample1 PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 
