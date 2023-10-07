@@ -29,7 +29,7 @@ endif()
 #################################################################################
 
 if(NOT WORKSPACE_ROOT_DIR)
-    set(WORKSPACE_ROOT_DIR "..")
+    set(WORKSPACE_ROOT_DIR "../..")
 endif()
 
 #################################################################################
@@ -90,30 +90,30 @@ set(KERNEL_SRCS ${KERNEL_SRCS}
 
 #################################################################################
 
-find_file(CONFIG_FILE sample1.cfg
+find_file(CONFIG_FILE sample2.cfg
     PATH ${TOPPERS_SAMPLE_WINDOWS_DIR}/
 )
 
 add_custom_command(
     OUTPUT  ${CMAKE_BINARY_DIR}/kernel_cfg.c ${CMAKE_BINARY_DIR}/kernel_id.h
-    DEPENDS ${CMAKE_BINARY_DIR}/sample1.i
+    DEPENDS ${CMAKE_BINARY_DIR}/sample2.i
     DEPENDS cfg
-    COMMAND cfg -s -c -v -obj -lj -cpu windows -system msvc <${CMAKE_BINARY_DIR}/sample1.i
+    COMMAND cfg -s -c -v -obj -lj -cpu windows -system msvc <${CMAKE_BINARY_DIR}/sample2.i
 )
 
-add_executable(sample1
+add_executable(sample2
 
     ${KERNEL_SRCS}
 
     ${CMAKE_BINARY_DIR}/kernel_cfg.c
-    ${TOPPERS_SAMPLE_WINDOWS_DIR}/sample1.c
+    ${TOPPERS_SAMPLE_WINDOWS_DIR}/sample2.c
 )
 
-target_link_libraries(sample1 winmm)
+target_link_libraries(sample2 winmm)
 
 file(RELATIVE_PATH relative ${CMAKE_BINARY_DIR} ${CMAKE_SOURCE_DIR})
 
-target_include_directories(sample1 PRIVATE
+target_include_directories(sample2 PRIVATE
     ${TOPPERS_CONFIG_WINDOWS_DIR}
     ${TOPPERS_KERNEL_DIR}
     ${TOPPERS_LIBRARY_DIR}
@@ -123,11 +123,11 @@ target_include_directories(sample1 PRIVATE
     ${CMAKE_BINARY_DIR}
 )
 
-target_sources(sample1 PRIVATE hal_resource.rc)
+target_sources(sample2 PRIVATE ../hal_resource.rc)
 
-set_target_properties(sample1 PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+set_target_properties(sample2 PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 
-target_compile_options(sample1
+target_compile_options(sample2
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX->
   PRIVATE $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra>
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-g -O0>
@@ -145,8 +145,7 @@ set(MSVC_PREPROC_INC_OPT
 )
 
 add_custom_command(
-    OUTPUT  ${CMAKE_BINARY_DIR}/sample1.i
+    OUTPUT  ${CMAKE_BINARY_DIR}/sample2.i
     DEPENDS ${CONFIG_FILE}
-    COMMAND echo ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} ${MSVC_PREPROC_INC_OPT} /P ${CONFIG_FILE}
     COMMAND      ${CMAKE_C_COMPILER} ${CMAKE_C_COMPILER_ARG1} ${MSVC_PREPROC_INC_OPT} /P ${CONFIG_FILE}
 )
