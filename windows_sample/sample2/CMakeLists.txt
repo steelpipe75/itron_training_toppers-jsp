@@ -129,9 +129,6 @@ set_target_properties(sample2 PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 
 target_compile_options(sample2
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX->
-  PRIVATE $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra>
-  PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-g -O0>
-  PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Release>>:-O3 -DNDEBUG>
 )
 
 set(MSVC_PREPROC_INC_OPT
