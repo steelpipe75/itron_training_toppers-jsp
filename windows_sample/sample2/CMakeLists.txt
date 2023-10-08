@@ -2,8 +2,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 # project情報
-project(toppers_sample
-    DESCRIPTION "TOPPERS sample win32"
+project(toppers_sample2
+    DESCRIPTION "TOPPERS sample2 win32"
     LANGUAGES C CXX
 )
 
