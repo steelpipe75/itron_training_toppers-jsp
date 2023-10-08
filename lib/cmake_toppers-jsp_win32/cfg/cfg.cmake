@@ -3,16 +3,6 @@ cmake_minimum_required(VERSION 3.16)
 
 #################################################################################
 
-if (MSVC)
-    set(CMAKE_C_FLAGS "/W4 /WX-")
-else()
-    set(CMAKE_C_FLAGS "-Wall -Wextra")
-    set(CMAKE_C_FLAGS_DEBUG "-g -O0")
-    set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
-endif()
-
-#################################################################################
-
 if(NOT WORKSPACE_ROOT_DIR)
     set(WORKSPACE_ROOT_DIR "../../..")
 endif()
