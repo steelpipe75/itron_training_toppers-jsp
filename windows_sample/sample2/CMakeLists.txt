@@ -57,6 +57,12 @@ add_executable(sample2
 
     ${KERNEL_SRCS}
 
+    ${TOPPERS_CONFIG_WINDOWS_DIR}/debugout.c
+    ${TOPPERS_CONFIG_WINDOWS_DIR}/eventlog.c
+    ${TOPPERS_CONFIG_WINDOWS_DIR}/hw_serial.c
+    ${TOPPERS_CONFIG_WINDOWS_DIR}/primary_thread.c
+    ${TOPPERS_CONFIG_WINDOWS_DIR}/com_support.cpp
+
     ${CMAKE_BINARY_DIR}/kernel_cfg.c
     ${TOPPERS_SAMPLE_WINDOWS_DIR}/sample2.c
 )

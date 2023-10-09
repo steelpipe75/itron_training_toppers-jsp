@@ -19,14 +19,9 @@ set(TOPPERS_INCLUDE_DIR         "${TOPPERS_DIR}/include")
 
 set(KERNEL_SRCS ${KERNEL_SRCS}
 
-    ${TOPPERS_CONFIG_WINDOWS_DIR}/com_support.cpp
     ${TOPPERS_CONFIG_WINDOWS_DIR}/cpu_config.c
     ${TOPPERS_CONFIG_WINDOWS_DIR}/cpu_defs.c
-    ${TOPPERS_CONFIG_WINDOWS_DIR}/debugout.c
-    ${TOPPERS_CONFIG_WINDOWS_DIR}/eventlog.c
-    ${TOPPERS_CONFIG_WINDOWS_DIR}/hw_serial.c
     ${TOPPERS_CONFIG_WINDOWS_DIR}/hw_timer.c
-    ${TOPPERS_CONFIG_WINDOWS_DIR}/primary_thread.c
     ${TOPPERS_CONFIG_WINDOWS_DIR}/sys_config.c
 
     ${TOPPERS_KERNEL_DIR}/banner.c
