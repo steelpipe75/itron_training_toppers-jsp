@@ -86,7 +86,7 @@ target_sources(sample2 PRIVATE ../hal_resource.rc)
 set_target_properties(sample2 PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
 
 target_compile_options(sample2
-  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX->
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX- /utf-8>
 )
 
 set(MSVC_PREPROC_INC_OPT

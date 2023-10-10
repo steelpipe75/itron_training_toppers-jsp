@@ -10,7 +10,7 @@ endif()
 #################################################################################
 
 if(NOT CFG_DIR)
-    set(CFG_DIR "${WORKSPACE_ROOT_DIR}/lib/third_party/toppers-jsp-for-msvc/jsp-1.4.4.1-full/cfg")
+    set(CFG_DIR "${WORKSPACE_ROOT_DIR}/lib/third_party/toppers-jsp-for-linux/jsp-1.4.4.1-full/cfg")
 endif()
 
 set(COMMON_CFG_SRCS
@@ -47,7 +47,7 @@ target_include_directories(cfg PRIVATE
 )
 
 target_compile_options(cfg
-  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX->
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX- /utf-8>
   PRIVATE $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra>
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-g -O0>
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Release>>:-O3 -DNDEBUG>
@@ -70,7 +70,7 @@ target_include_directories(chk PRIVATE
 )
 
 target_compile_options(chk
-  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX->
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/W4 /WX- /utf-8>
   PRIVATE $<$<CXX_COMPILER_ID:Clang>:-Wall -Wextra>
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Debug>>:-g -O0>
   PRIVATE $<$<AND:$<CXX_COMPILER_ID:Clang>,$<CONFIG:Release>>:-O3 -DNDEBUG>

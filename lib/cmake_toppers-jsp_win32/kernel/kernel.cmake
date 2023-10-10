@@ -9,7 +9,7 @@ endif()
 
 #################################################################################
 
-set(TOPPERS_DIR                 "${WORKSPACE_ROOT_DIR}/lib/third_party/toppers-jsp-for-msvc/jsp-1.4.4.1-full")
+set(TOPPERS_DIR                 "${WORKSPACE_ROOT_DIR}/lib/third_party/toppers-jsp-for-linux/jsp-1.4.4.1-full")
 set(TOPPERS_CONFIG_WINDOWS_DIR  "${TOPPERS_DIR}/config/windows")
 set(TOPPERS_KERNEL_DIR          "${TOPPERS_DIR}/kernel")
 set(TOPPERS_LIBRARY_DIR         "${TOPPERS_DIR}/library")
