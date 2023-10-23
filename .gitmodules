@@ -1,6 +1,3 @@
-[submodule "lib/third_party/toppers-jsp-for-msvc"]
-	path = lib/third_party/toppers-jsp-for-msvc
-	url = https://github.com/steelpipe75/toppers-jsp-for-msvc
 [submodule "lib/third_party/toppers-jsp-for-linux"]
 	path = lib/third_party/toppers-jsp-for-linux
 	url = https://github.com/steelpipe75/toppers-jsp-for-linux
